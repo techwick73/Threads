@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace Threads
 {
@@ -6,8 +7,12 @@ namespace Threads
     {
         static void Main(string[] args)
         {
-            Function1();
-            Function2();
+            Thread obj1 = new Thread(Function1);
+            Thread obj2 = new Thread(Function2);
+
+            obj1.Start();
+            obj2.Start();
+
         }
 
         static void Function1()
@@ -15,6 +20,8 @@ namespace Threads
             for (int i = 0; i < 10; i++)
             {
                 System.Console.WriteLine($"Function 1 executed: {i.ToString()}"); ;
+                // wait fir 4 secs
+                Thread.Sleep(4000);
             }
 
         }
@@ -23,6 +30,8 @@ namespace Threads
             for (int i = 0; i < 10; i++)
             {
                 System.Console.WriteLine($"Function 2 executed: {i.ToString()}"); ;
+                // wait fir 4 secs
+                Thread.Sleep(4000);
             }
 
         }
