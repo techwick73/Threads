@@ -8,14 +8,28 @@ namespace Threads
         static void Main(string[] args)
         {
             // Create a single thread to run Function1 in parallel
-            // Threads are foreground by default
-            // Thread1 continues to run even though Main has exited
 
+            Thread obj1 = new Thread(Function1);
+
+            // Threads are foreground by default
+
+            // Foreground Execution
+            // ======================
+            // Thread1 continues to run even though Main has exited i.e. child continues even though parent is terminated
+            // It continues until its logic is done
             // Function 1 is entered...
             // The main application has exited...
             // <enter in something>
             // Function 1 is exited...
-            Thread obj1 = new Thread(Function1);
+
+            // Background Execution
+            // =====================
+            // Thread1 dies as soon as Min is finished i.e. child is terminated as soon as parent is
+            // The main application has exited...
+            // Function 1 is entered...
+
+            // Start as a background thread. Comment out this line to run as foreground
+            obj1.IsBackground = true;
 
             obj1.Start();
 
