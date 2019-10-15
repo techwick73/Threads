@@ -7,33 +7,32 @@ namespace Threads
     {
         static void Main(string[] args)
         {
+            // Create a single thread to run Function1 in parallel
+            // Threads are foreground by default
+            // Thread1 continues to run even though Main has exited
+
+            // Function 1 is entered...
+            // The main application has exited...
+            // <enter in something>
+            // Function 1 is exited...
             Thread obj1 = new Thread(Function1);
-            Thread obj2 = new Thread(Function2);
 
             obj1.Start();
-            obj2.Start();
+
+            // Control is returned from Function1
+            System.Console.WriteLine("The main application has exited ...");
 
         }
 
         static void Function1()
         {
-            for (int i = 0; i < 10; i++)
-            {
-                System.Console.WriteLine($"Function 1 executed: {i.ToString()}"); ;
-                // wait fir 4 secs
-                Thread.Sleep(4000);
-            }
+
+            System.Console.WriteLine("Function 1 is entered ...");
+            // waits here until user enters something
+            Console.ReadLine(); // wait here
+            System.Console.WriteLine("Function 1 is exited ...");
 
         }
-        static void Function2()
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                System.Console.WriteLine($"Function 2 executed: {i.ToString()}"); ;
-                // wait fir 4 secs
-                Thread.Sleep(4000);
-            }
 
-        }
     }
 }
